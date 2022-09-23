@@ -3,7 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserLookupService", "backend\UserLookupService\UserLookupService.csproj", "{DCA3CA93-7F3C-4999-9FC4-1BE961A3658B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieReviewService", "backend\MovieReviewService\MovieReviewService.csproj", "{DCA3CA93-7F3C-4999-9FC4-1BE961A3658B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{143CB850-71D6-41E5-A186-03ECBC12DE21} = {143CB850-71D6-41E5-A186-03ECBC12DE21}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Solution Items", "0 - Solution Items", "{6FC6F8E4-65A6-4186-9869-A9D4B022D487}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,11 +23,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Shared", "2 - Shared", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Data", "3 - Data", "{FE09DC75-29D7-4355-BD32-6433DA8D05B0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserLookupService.Abstractions", "backend\UserLookupService.Abstractions\UserLookupService.Abstractions.csproj", "{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieReviewService.Abstractions", "backend\MovieReviewService.Abstractions\MovieReviewService.Abstractions.csproj", "{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserLookupService.Data", "backend\UserLookupService.Data\UserLookupService.Data.csproj", "{1A8EB8EA-140D-485B-A85E-F3B33CD38D3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieReviewService.Data", "backend\MovieReviewService.Data\MovieReviewService.Data.csproj", "{1A8EB8EA-140D-485B-A85E-F3B33CD38D3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerService1", "WorkerService1\WorkerService1.csproj", "{DF5E4295-AA5E-4499-A68C-8DA43B328BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerService1", "WorkerService1\WorkerService1.csproj", "{DF5E4295-AA5E-4499-A68C-8DA43B328BDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieReviewService.Application", "MovieReviewService\MovieReviewService.Application.csproj", "{143CB850-71D6-41E5-A186-03ECBC12DE21}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E} = {00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,22 +40,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DCA3CA93-7F3C-4999-9FC4-1BE961A3658B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCA3CA93-7F3C-4999-9FC4-1BE961A3658B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA3CA93-7F3C-4999-9FC4-1BE961A3658B}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA3CA93-7F3C-4999-9FC4-1BE961A3658B}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{DCA3CA93-7F3C-4999-9FC4-1BE961A3658B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCA3CA93-7F3C-4999-9FC4-1BE961A3658B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00E1BBEC-4516-4043-9C6D-AC4B2CD4116E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A8EB8EA-140D-485B-A85E-F3B33CD38D3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A8EB8EA-140D-485B-A85E-F3B33CD38D3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8EB8EA-140D-485B-A85E-F3B33CD38D3E}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8EB8EA-140D-485B-A85E-F3B33CD38D3E}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{1A8EB8EA-140D-485B-A85E-F3B33CD38D3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A8EB8EA-140D-485B-A85E-F3B33CD38D3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF5E4295-AA5E-4499-A68C-8DA43B328BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF5E4295-AA5E-4499-A68C-8DA43B328BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF5E4295-AA5E-4499-A68C-8DA43B328BDB}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{DF5E4295-AA5E-4499-A68C-8DA43B328BDB}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{DF5E4295-AA5E-4499-A68C-8DA43B328BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF5E4295-AA5E-4499-A68C-8DA43B328BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{143CB850-71D6-41E5-A186-03ECBC12DE21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{143CB850-71D6-41E5-A186-03ECBC12DE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{143CB850-71D6-41E5-A186-03ECBC12DE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{143CB850-71D6-41E5-A186-03ECBC12DE21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
