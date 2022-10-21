@@ -16,7 +16,7 @@ namespace MovieReviewService.Application.MovieUseCase
         public async Task<Movie> UpdateMovieAsync(Movie movie, CancellationToken cancellationToken)
         {
             
-            var updatedMovie = await _movieRepository.UpdateUserAsync(movie, cancellationToken);
+            var updatedMovie = await _movieRepository.UpdateMovieAsync(movie, cancellationToken);
 
             return updatedMovie;
         }

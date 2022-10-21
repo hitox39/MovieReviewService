@@ -61,7 +61,7 @@ public class MainContext : DbContext
             .IsRequired();
         modelBuilder.Entity<Movie>().Property(m => m.Title)
             .IsRequired()
-            .HasMaxLength(25);
+            .HasMaxLength(50);
         modelBuilder.Entity<Movie>().Property(u => u.MovieTypes)
             .IsRequired();
 

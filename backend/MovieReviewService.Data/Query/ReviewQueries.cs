@@ -1,54 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using MovieReviewService.Abstractions;
 using MovieReviewService.Data.Interfaces;
+using MovieReviewService.Data.Models;
 
-namespace MovieReviewService.Data.Query
+namespace MovieReviewService.Data.Query;
+
+public class ReviewQueries : IReviewQuery
 {
-    internal class ReviewQueries : IReviewQuery
+    private readonly MainContext _dbContext;
 
+    public ReviewQueries(MainContext dbContext)
     {
-        public Task<IList<Review>> GetReviewAsync(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        _dbContext = dbContext;
+    }
 
-        public Task<IList<Review>> GetReviewAsync(int Rating, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<IList<Abstractions.Review>> GetAllReviewsAsync(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 
-        public Task<Review> GetReviewAsync(Guid id, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<IList<Abstractions.Review>> GetReviewAsync(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 
-        public Task<IList<Review>> GetReviewAsync(Movie movie, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<IList<Abstractions.Review>> GetReviewAsync(int rating, CancellationToken cancellationToken)
+    {
+        var review = await _dbContext.Reviews
+        .Where(r => r.Rating == rating)
+        .ToListAsync(cancellationToken);
 
-        public Task<IList<Review>> GetReviewAsync(User user, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        return ReviewModelMapper.ToBusiness(review);
+    }
 
-        public Task<IList<Review>> GetReviewByTextAsync(string Text, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<Abstractions.Review> GetReviewAsync(Guid id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 
-        public Task<IList<Review>> GetReviewByTitleAsync(string Title, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<IList<Abstractions.Review>> GetReviewAsync(Abstractions.Movie movie, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 
-        public Task<Review> GetUserAsync(Guid id, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<IList<Abstractions.Review>> GetReviewAsync(Abstractions.User user, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IList<Abstractions.Review>> GetReviewByTextAsync(string Text, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IList<Abstractions.Review>> GetReviewByTitleAsync(string Title, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Abstractions.Review> GetUserAsync(Guid id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }
+
+
+

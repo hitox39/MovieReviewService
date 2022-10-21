@@ -14,19 +14,26 @@ public class MovieRepository : IMovieRepository
     private readonly MainContext _dbContext;
 
 
+
     public MovieRepository(MainContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public Task<Abstractions.Movie> AddAsync(Abstractions.Movie movie, CancellationToken cancellationToken)
+    public async Task<Abstractions.Movie> AddAsync(Abstractions.Movie movie, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _dbContext.Movies.AddAsync(MovieModelMapper.ToDatabase(movie), cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
+        return movie;
     }
 
-    public Task DeleteMovieAsync(Guid id, CancellationToken cancellationToken)
+    public async Task DeleteMovieAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _dbContext.Movies.Remove(new Movie
+        {
+            Id = id
+        });
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<Abstractions.Movie> GetMovieAsync(Guid id, CancellationToken cancellationToken)
@@ -39,8 +46,12 @@ public class MovieRepository : IMovieRepository
         return MovieModelMapper.ToBusiness(movie);
     }
 
-    public Task<Abstractions.Movie> UpdateUserAsync(Abstractions.Movie movie, CancellationToken cancellationToken)
+    public async Task<Abstractions.Movie> UpdateMovieAsync(Abstractions.Movie movie, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await DeleteMovieAsync(movie.Id, cancellationToken);
+        await _dbContext.Movies.AddAsync(MovieModelMapper.ToDatabase(movie), cancellationToken);
+
+        await _dbContext.SaveChangesAsync(cancellationToken);
+        return movie;
     }
 }

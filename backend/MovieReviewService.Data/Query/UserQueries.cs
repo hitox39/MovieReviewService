@@ -13,13 +13,7 @@ public class UserQueries : IUserQuery
         _dbContext = dbContext;
     }
 
-    /// <summary>
-    /// Get user by Id
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
+   
     public async Task<Abstractions.User> GetUserAsync(Guid id, CancellationToken cancellationToken)
     {
         var user = await _dbContext.Users
@@ -30,11 +24,7 @@ public class UserQueries : IUserQuery
         return UserModelMapper.ToBusiness(user);
     }
 
-    /// <summary>
-    /// Get all users
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    
     public async Task<IList<Abstractions.User>> GetUsersAsync(CancellationToken cancellationToken)
     {
         var users = await _dbContext.Users
@@ -43,12 +33,7 @@ public class UserQueries : IUserQuery
         return UserModelMapper.ToBusiness(users);
     }
 
-    /// <summary>
-    /// Get all users by zipCode
-    /// </summary>
-    /// <param name="zipCode">zipCode to filter</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+   
     public async Task<IList<Abstractions.User>> GetUsersAsync(string zipCode, CancellationToken cancellationToken)
     {
         var users = await _dbContext.Users
