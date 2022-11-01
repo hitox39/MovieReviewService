@@ -1,6 +1,4 @@
-﻿using MovieReviewService.Abstractions;
-
-namespace MovieReviewService.Data.Interfaces;
+﻿namespace MovieReviewService.Abstractions.Interfaces;
 
 public interface IReviewQuery
 {
