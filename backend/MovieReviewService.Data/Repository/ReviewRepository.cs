@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MovieReviewService.Abstractions;
 using MovieReviewService.Data.Models;
+using MovieReviewService.Data.Interfaces;
 
 namespace MovieReviewService.Data.Repository
 {

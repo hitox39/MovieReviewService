@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MovieReviewService.Data.Interfaces;
 using MovieReviewService.Data.Models;
 
@@ -12,8 +7,6 @@ namespace MovieReviewService.Data.Repository;
 public class MovieRepository : IMovieRepository
 {
     private readonly MainContext _dbContext;
-
-
 
     public MovieRepository(MainContext dbContext)
     {

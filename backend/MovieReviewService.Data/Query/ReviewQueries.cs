@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieReviewService.Abstractions;
+using MovieReviewService.Abstractions.Interfaces;
 using MovieReviewService.Data.Interfaces;
 using MovieReviewService.Data.Models;
 
@@ -7,60 +8,73 @@ namespace MovieReviewService.Data.Query;
 
 public class ReviewQueries : IReviewQuery
 {
-    private readonly MainContext _dbContext;
+    private readonly MainContext _mainContext;
 
-    public ReviewQueries(MainContext dbContext)
+    public ReviewQueries(MainContext mainContext)
     {
-        _dbContext = dbContext;
+        _mainContext = mainContext;
     }
-
-    public Task<IList<Abstractions.Review>> GetAllReviewsAsync(CancellationToken cancellationToken)
+    public async Task<IList<Abstractions.Review>> GetReviewsByRatingAsync(int rating, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<IList<Abstractions.Review>> GetReviewAsync(CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IList<Abstractions.Review>> GetReviewAsync(int rating, CancellationToken cancellationToken)
-    {
-        var review = await _dbContext.Reviews
+        var review = await _mainContext.Reviews
         .Where(r => r.Rating == rating)
         .ToListAsync(cancellationToken);
 
         return ReviewModelMapper.ToBusiness(review);
     }
 
-    public Task<Abstractions.Review> GetReviewAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<IList<Abstractions.Review>> GetAllReviewsAsync(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var review = await _mainContext.Reviews
+         .ToListAsync(cancellationToken);
+
+        return ReviewModelMapper.ToBusiness(review);
     }
 
-    public Task<IList<Abstractions.Review>> GetReviewAsync(Abstractions.Movie movie, CancellationToken cancellationToken)
+    public async Task<Abstractions.Review> GetReviewByTitleAsync(string title, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var reviews = await _mainContext.Reviews
+        .Where(r => r.Title == title)
+        .SingleAsync(cancellationToken);
+
+        return ReviewModelMapper.ToBusiness(reviews);
     }
 
-    public Task<IList<Abstractions.Review>> GetReviewAsync(Abstractions.User user, CancellationToken cancellationToken)
+    public async Task<Abstractions.Review> GetReviewAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var review = await _mainContext.Reviews
+       .Where(r => r.Id == id)
+       .SingleAsync(cancellationToken);
+
+        return ReviewModelMapper.ToBusiness(review);
     }
 
-    public Task<IList<Abstractions.Review>> GetReviewByTextAsync(string Text, CancellationToken cancellationToken)
+    public async Task<IList<Abstractions.Review>> GetReviewByMovieAsync(Abstractions.Movie movie, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var review = await _mainContext.Reviews
+         .Where(r => r.Movie.Id == movie.Id)
+         .ToListAsync(cancellationToken);
+
+        return ReviewModelMapper.ToBusiness(review);
     }
 
-    public Task<IList<Abstractions.Review>> GetReviewByTitleAsync(string Title, CancellationToken cancellationToken)
+    public async Task<IList<Abstractions.Review>> GetReviewsByUserAsync(Abstractions.User user, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var reviews = await _mainContext.Reviews
+       .Where(r => r.User.Id == user.Id)
+       .ToListAsync(cancellationToken);
+
+        return ReviewModelMapper.ToBusiness(reviews);
     }
 
-    public Task<Abstractions.Review> GetUserAsync(Guid id, CancellationToken cancellationToken)
+
+    public async Task<Abstractions.Review> GetReviewByUserAsync(Abstractions.User user, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var review = await _mainContext.Reviews
+       .Where(r => r.User.Id == user.Id)
+       .SingleAsync(cancellationToken);
+
+        return ReviewModelMapper.ToBusiness(review);
     }
 }
 

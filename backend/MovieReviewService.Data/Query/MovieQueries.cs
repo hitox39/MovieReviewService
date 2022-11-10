@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MovieReviewService.Abstractions;
 using MovieReviewService.Abstractions.Models;
 using MovieReviewService.Data.Interfaces;
+using MovieReviewService.Data.Models;
 
 namespace MovieReviewService.Data.Query;
 
@@ -17,13 +19,20 @@ public class MovieQueries : IMovieQuery
         _mainContext = mainContext;
     }
 
-    public Task<Movie> GetMovieAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<Abstractions.Movie> GetMovieAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var movie = await _mainContext.Movies
+                 .Where(m => m.Id == id)
+             .SingleAsync(cancellationToken);
+
+        return MovieModelMapper.ToBusiness(movie);
     }
 
-    public Task<IList<Movie>> GetMoviesAsync(MovieType movieType, CancellationToken cancellationToken)
+    public async Task<IList<Abstractions.Movie>> GetMoviesAsync(MovieType movieType, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var movie = await _mainContext.Movies
+               .ToListAsync(cancellationToken);
+
+        return MovieModelMapper.ToBusiness(movie);
     }
 }
