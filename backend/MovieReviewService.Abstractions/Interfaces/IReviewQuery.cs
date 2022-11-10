@@ -1,17 +1,13 @@
-﻿using MovieReviewService.Abstractions;
-
-namespace MovieReviewService.Data.Interfaces;
+﻿namespace MovieReviewService.Abstractions.Interfaces;
 
 public interface IReviewQuery
 {
-    Task<Review> GetUserAsync(Guid id, CancellationToken cancellationToken);
-    Task<IList<Review>> GetReviewAsync(CancellationToken cancellationToken);
-    Task<IList<Review>> GetReviewByTitleAsync(string Title, CancellationToken cancellationToken);
-    Task<IList<Review>> GetReviewByTextAsync(string Text, CancellationToken cancellationToken);
-    Task<IList<Review>> GetReviewAsync(int Rating, CancellationToken cancellationToken);
+    Task<IList<Review>> GetAllReviewsAsync(CancellationToken cancellationToken);
+    Task<Review> GetReviewByTitleAsync(string title, CancellationToken cancellationToken);
+    Task<IList<Review>> GetReviewsByRatingAsync(int rating, CancellationToken cancellationToken);
     Task<Review> GetReviewAsync(Guid id, CancellationToken cancellationToken);
-    Task<IList<Review>> GetReviewAsync(Movie movie, CancellationToken cancellationToken);
-    Task<IList<Review>> GetReviewAsync(User user, CancellationToken cancellationToken);
+    Task<IList<Review>> GetReviewByMovieAsync(Movie movie, CancellationToken cancellationToken);
+    Task<Review> GetReviewByUserAsync(User user, CancellationToken cancellationToken);
 
 
 }

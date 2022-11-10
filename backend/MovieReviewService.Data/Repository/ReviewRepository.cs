@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MovieReviewService.Abstractions;
 using MovieReviewService.Data.Models;
+using MovieReviewService.Data.Interfaces;
 
 namespace MovieReviewService.Data.Repository
 {
@@ -32,13 +33,12 @@ namespace MovieReviewService.Data.Repository
         public async Task<Abstractions.Review> UpdateReviewAsync(Abstractions.Review review, CancellationToken cancellationToken)
         {
             await DeleteReviewAsync(review.Id, cancellationToken);
+            await _dbContext.Reviews.AddAsync(ReviewModelMapper.ToDatabase(review), cancellationToken);
 
-            return await AddAsync(ReviewModelMapper.ToDatabase(review), cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return review;
         }
 
-        private Task<Abstractions.Review> AddAsync(Models.Review review, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

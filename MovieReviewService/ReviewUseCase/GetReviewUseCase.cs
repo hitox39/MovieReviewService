@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MovieReviewService.Abstractions;
+using MovieReviewService.Abstractions.Interfaces;
 using MovieReviewService.Data.Interfaces;
 
 namespace MovieReviewService.Application.ReviewUseCase;
